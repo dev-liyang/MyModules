@@ -1,8 +1,8 @@
 //
 //  OC_LYPageView__UITests.m
-//  OC-LYPageView设计UITests
+//  LYPageViewDemoUITests
 //
-//  Created by liyang on 2018/5/2.
+//  Created by liyang on 2018/12/6.
 //  Copyright © 2018年 liyang. All rights reserved.
 //
 
