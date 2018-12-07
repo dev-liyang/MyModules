@@ -68,7 +68,7 @@
 - (void)setupLabels{
     [_titles enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont systemFontOfSize:_titleStyle.fontSize];
+        label.font = _titleStyle.font;
         label.text = obj;
         label.textColor = idx == 0 ? _titleStyle.selectColor : _titleStyle.normalColor;
         label.tag = idx;
@@ -91,9 +91,7 @@
     CGFloat h = _titleStyle.titleHeight;
     NSInteger count = _titleLabels.count;
     
-    if (_titleStyle.alignType == TitleAlignType_Default) {
-        
-    } else if (_titleStyle.alignType == TitleAlignType_Center) {
+    if (_titleStyle.alignType == TitleAlignType_Center) {
         x = (self.bounds.size.width - allLabelsFrameWidth)*0.5;
     }
     
@@ -176,15 +174,15 @@
         _markLineView.frame = frame;
         _markLineViewRect = frame;
     }];
-
 }
 
 #pragma mark - Public Method
+//滑动结束，选中目标
 - (void)didScrollEndWithTargetIndex:(NSInteger)targetIndex{
     [self setSelectedTitle:targetIndex];
 }
 
-//设置mark的farme
+//滑动过程中，实时设置mark的frame
 - (void)didScrollWithTargetIndex:(NSInteger)targetIndex progress:(CGFloat)progress{
     
     //当前bottomLine
@@ -229,15 +227,26 @@
 }
 
 #pragma mark - Help Method
+//获取文字内容宽度
 - (CGFloat)getTextWidth:(NSString *)text{
-    return [text boundingRectWithSize:CGSizeMake(_titleStyle.labelMaxWidth, _titleStyle.titleHeight) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:_titleStyle.fontSize]} context:nil].size.width;
+    return [text boundingRectWithSize:CGSizeMake(_titleStyle.labelMaxWidth, _titleStyle.titleHeight) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : _titleStyle.font} context:nil].size.width;
 }
 
+//这段代码主要是判断当前的标题排版是否应该滑动显示
 - (BOOL)getContentIsScroll{
-    ///这段代码主要是判断当前的标题排版是否应该滑动显示
-    BOOL isScroll = NO;
+    
+    [self computeAllLabelsWidth];
+    
+    if (allLabelsFrameWidth > self.frame.size.width) {
+        return  YES;
+    }
+    
+    return NO;
+}
+
+//计算所有label的宽度
+- (void)computeAllLabelsWidth{
     for (NSString *title in _titles) {
-        
         CGFloat labelContentW = [self getTextWidth:title];
         CGFloat labelFrameW = labelContentW + _titleStyle.labelHoriPadding*2;
         
@@ -247,10 +256,6 @@
         allLabelsContentWidth += labelContentW;
         allLabelsFrameWidth += labelFrameW;
     }
-    if (allLabelsFrameWidth > self.frame.size.width) {
-        isScroll = YES;
-    }
-    return isScroll;
 }
 
 #pragma mark - 懒加载
@@ -267,7 +272,7 @@
 - (UIView *)markLineView{
     if (!_markLineView) {
         _markLineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - _titleStyle.markLineHeight, 0, _titleStyle.markLineHeight)];
-        _markLineView.backgroundColor = _titleStyle.selectColor;
+        _markLineView.backgroundColor = _titleStyle.markLineColor;
         [self.scrollView addSubview:_markLineView];
     }
     return _markLineView;

@@ -17,11 +17,12 @@
         
         _titleTopMargin = [UIApplication sharedApplication].statusBarFrame.size.height;
         _titleHeight = 44.0;
-        _fontSize = 14.0;
+        _font = [UIFont systemFontOfSize:15.0];
         _labelHoriPadding = 20.0;
         _labelMaxWidth = 100.0;
         _normalColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
         _selectColor = [UIColor colorWithRed:255/255.0 green:127/255.0 blue:0 alpha:1];
+        _markLineColor = _selectColor;
         
         _markLineHeight = 2;
     }

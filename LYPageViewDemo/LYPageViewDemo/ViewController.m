@@ -30,7 +30,9 @@
     }
     
     LYTitleStyle *style = [[LYTitleStyle alloc] init];
+    style.font = [UIFont boldSystemFontOfSize:15];
     style.labelHoriPadding = 20;
+    style.markLineColor = [UIColor redColor];
 //    style.markLineWidth = 60;
 //    style.alignType = TitleAlignType_Center;
     

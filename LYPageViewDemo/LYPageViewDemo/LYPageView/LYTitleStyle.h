@@ -17,11 +17,12 @@ typedef NS_ENUM(NSUInteger, TitleAlignType) {
 
 @property (nonatomic, assign) CGFloat titleTopMargin;   //头部间隙
 @property (nonatomic, assign) CGFloat titleHeight;      //标题高度
-@property (nonatomic, assign) CGFloat fontSize;         //字体大小
+@property (nonatomic, strong) UIFont  *font;            //字体
 @property (nonatomic, assign) CGFloat labelHoriPadding; //label水平方向内间距
 @property (nonatomic, assign) CGFloat labelMaxWidth;    //label最大宽度
 @property (nonatomic, strong) UIColor *normalColor;     //默认颜色
 @property (nonatomic, strong) UIColor *selectColor;     //选中颜色
+@property (nonatomic, strong) UIColor *markLineColor;   //标识线颜色
 @property (nonatomic, assign) TitleAlignType alignType; //排列模式
 
 @property (nonatomic, assign) CGFloat markLineWidth;        //标识下滑线宽度，defaul=0（和文字内容宽度保持一致）
