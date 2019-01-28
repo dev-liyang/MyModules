@@ -15,8 +15,8 @@
     self = [super init];
     if (self) {
         
-        _titleTopMargin = [UIApplication sharedApplication].statusBarFrame.size.height;
-        _titleHeight = 44.0;
+        _textTopMargin = [UIApplication sharedApplication].statusBarFrame.size.height;
+        _textHeight = 44.0;
         _font = [UIFont systemFontOfSize:15.0];
         _labelHoriPadding = 20.0;
         _labelMaxWidth = 100.0;

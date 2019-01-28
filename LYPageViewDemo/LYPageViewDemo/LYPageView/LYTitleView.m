@@ -27,16 +27,16 @@
 {
     CGFloat allLabelsFrameWidth;
     CGFloat allLabelsContentWidth;
-    NSMutableArray *labelsFrameWidthArr;
-    NSMutableArray *labelsContentWidthArr;
-    
+    NSMutableArray *labelsFrameWidthArr;   //文字label大小
+    NSMutableArray *labelsContentWidthArr; //文字宽度数组
+    CGFloat scrollContentWidth;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSMutableArray *)titles titleStyle:(LYTitleStyle *)titleStyle{
     
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = titleStyle.backgroundColor ? titleStyle.backgroundColor : [UIColor whiteColor];
         
         self.titles = titles;
         self.titleStyle = titleStyle;
@@ -75,20 +75,22 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.userInteractionEnabled = YES;
         [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelClick:)]];
+        
         [_scrollView addSubview:label];
         
         [_titleLabels addObject:label];
     }];
     
 }
+
 - (void)setupLablesFrame{
     
-    BOOL isScroll = [self getContentIsScroll];
+    [self computeAllLabelsWidth];
     
     CGFloat x = 0;
-    CGFloat y = _titleStyle.titleTopMargin;
+    CGFloat y = _titleStyle.textTopMargin;
     CGFloat w = 0;
-    CGFloat h = _titleStyle.titleHeight;
+    CGFloat h = _titleStyle.textHeight;
     NSInteger count = _titleLabels.count;
     
     if (_titleStyle.alignType == TitleAlignType_Center) {
@@ -99,18 +101,7 @@
         
         UILabel *label = _titleLabels[i];
         
-        if (_titleStyle.alignType == TitleAlignType_Default) {
-            
-            if (isScroll) { //title滚动
-                w = [labelsFrameWidthArr[i] floatValue];
-                
-            } else { //title不滚动
-                w = self.bounds.size.width / count;
-            }
-            
-        } else if (_titleStyle.alignType == TitleAlignType_Center) {
-            w = [labelsFrameWidthArr[i] floatValue];
-        }
+        w = [labelsFrameWidthArr[i] floatValue];
         
         label.frame = CGRectMake(x, y, w, h);
         
@@ -120,11 +111,7 @@
             [self setmarkLineViewFrame];
         }
     }
-    if (isScroll) {
-        self.scrollView.contentSize = CGSizeMake(allLabelsFrameWidth, self.bounds.size.height);
-    }else{
-        self.scrollView.contentSize = CGSizeMake(_scrollView.bounds.size.width, _scrollView.bounds.size.height);
-    }
+    self.scrollView.contentSize = CGSizeMake(scrollContentWidth, self.bounds.size.height);
 }
 
 // 设置title选中项
@@ -165,6 +152,8 @@
     CGFloat markW = _titleStyle.markLineWidth;
     if (markW == 0) {
         markW = [labelsContentWidthArr[_currentIndex] floatValue];
+    } else if (markW == -1) {
+        markW = [labelsFrameWidthArr[_currentIndex] floatValue];
     }
 
     CGRect frame = _markLineView.frame;
@@ -189,6 +178,8 @@
     CGFloat curtW = _titleStyle.markLineWidth;
     if (curtW == 0) {
         curtW = [labelsContentWidthArr[_currentIndex] floatValue];
+    } if (curtW == -1) {
+        curtW = [labelsFrameWidthArr[_currentIndex] floatValue];
     }
     UILabel *curtLabel = _titleLabels[_currentIndex];
     CGFloat curtLabelX = curtLabel.frame.origin.x + (curtLabel.bounds.size.width - curtW)*0.5;
@@ -197,6 +188,8 @@
     CGFloat targetW = _titleStyle.markLineWidth;
     if (targetW == 0) {
        targetW = [labelsContentWidthArr[targetIndex] floatValue];
+    } if (targetW == -1) {
+        targetW = [labelsFrameWidthArr[targetIndex] floatValue];
     }
     UILabel *targetLabel = _titleLabels[targetIndex];
     CGFloat targetLabelX = targetLabel.frame.origin.x + (targetLabel.bounds.size.width - targetW)*0.5;
@@ -229,32 +222,41 @@
 #pragma mark - Help Method
 //获取文字内容宽度
 - (CGFloat)getTextWidth:(NSString *)text{
-    return [text boundingRectWithSize:CGSizeMake(_titleStyle.labelMaxWidth, _titleStyle.titleHeight) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : _titleStyle.font} context:nil].size.width;
-}
-
-//这段代码主要是判断当前的标题排版是否应该滑动显示
-- (BOOL)getContentIsScroll{
-    
-    [self computeAllLabelsWidth];
-    
-    if (allLabelsFrameWidth > self.frame.size.width) {
-        return  YES;
-    }
-    
-    return NO;
+    return [text boundingRectWithSize:CGSizeMake(_titleStyle.labelMaxWidth, _titleStyle.textHeight) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : _titleStyle.font} context:nil].size.width;
 }
 
 //计算所有label的宽度
 - (void)computeAllLabelsWidth{
-    for (NSString *title in _titles) {
-        CGFloat labelContentW = [self getTextWidth:title];
-        CGFloat labelFrameW = labelContentW + _titleStyle.labelHoriPadding*2;
-        
-        [labelsContentWidthArr addObject:@(labelContentW)];
-        [labelsFrameWidthArr addObject:@(labelFrameW)];
-        
-        allLabelsContentWidth += labelContentW;
-        allLabelsFrameWidth += labelFrameW;
+    if (_titleStyle.alignType == TitleAlignType_Default) {
+        for (NSString *title in _titles) {
+            CGFloat labelContentW = [self getTextWidth:title];
+            CGFloat labelFrameW = labelContentW + _titleStyle.labelHoriPadding*2;
+            
+            [labelsContentWidthArr addObject:@(labelContentW)];
+            [labelsFrameWidthArr addObject:@(labelFrameW)];
+            
+            allLabelsContentWidth += labelContentW;
+            allLabelsFrameWidth += labelFrameW;
+            scrollContentWidth = allLabelsFrameWidth;
+        }
+        if (allLabelsFrameWidth < self.frame.size.width) { //总宽度小于屏幕宽度，等分处理
+            [labelsFrameWidthArr removeAllObjects];
+            allLabelsFrameWidth = 0;
+            for (int i = 0; i < _titles.count; i ++) {
+                CGFloat labelW = self.frame.size.width / (CGFloat)_titles.count;
+                [labelsFrameWidthArr addObject:@(labelW)];
+                allLabelsFrameWidth += labelW;
+            }
+            scrollContentWidth = self.frame.size.width;
+        }
+    } else { //center
+        for (NSString *title in _titles) {
+            CGFloat labelContentW = [self getTextWidth:title];
+            CGFloat labelFrameW = labelContentW + _titleStyle.labelHoriPadding*2;
+            [labelsFrameWidthArr addObject:@(labelFrameW)];
+            allLabelsFrameWidth += labelFrameW;
+        }
+        scrollContentWidth = self.frame.size.width;
     }
 }
 

@@ -43,7 +43,7 @@
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
     
-    CGFloat titleViewHeight = _titleStyle.titleTopMargin + _titleStyle.titleHeight;
+    CGFloat titleViewHeight = _titleStyle.textTopMargin + _titleStyle.textHeight;
     CGRect frame = CGRectMake(0, 0, width, titleViewHeight);
     _titleView = [[LYTitleView alloc] initWithFrame:frame titles:_titles titleStyle:_titleStyle];
     [self addSubview:_titleView];

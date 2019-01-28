@@ -20,7 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *arr = @[@"要闻", @"新时代", @"娱乐"];
+    self.view.backgroundColor = [UIColor brownColor];
+    
+    NSArray *arr = @[@"要闻", @"新时代的人", @"娱乐", @"娱乐", @"娱乐", @"娱乐", @"娱乐"];
 //    NSArray *arr = @[@"要闻", @"新时代", @"娱乐", @"推荐", @"体育", @"军事", @"财经"];
     NSMutableArray *titles = [NSMutableArray arrayWithArray:arr];
     NSMutableArray * childVcs = [NSMutableArray array];
@@ -35,6 +37,8 @@
     style.markLineColor = [UIColor redColor];
 //    style.markLineWidth = 60;
 //    style.alignType = TitleAlignType_Center;
+    style.backgroundColor = [UIColor clearColor];
+//    style.markLineWidth = 50;
     
     LYPageView *pageView = [[LYPageView alloc] initWithFrame:self.view.bounds titles:titles childVcs:childVcs parentVc:self titleStyle:style];
     [self.view addSubview:pageView];
