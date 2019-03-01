@@ -29,6 +29,9 @@ char firstAppearOnceChar(char *str);
 //LeetCode: 136.只出现一次的数字
 int singleNumber(int* nums, int numsSize) ;
 
+//LeetCode: 169.求众数
+- (int)majorityElement:(NSArray *)arr;
+
 //LeetCode: 283.移动零
 void moveZeroes(int* nums, int numsSize);
 

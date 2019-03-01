@@ -10,8 +10,31 @@
 
 @implementation LeetCodeOC
 
+//--------------------------- Debug Start ---------------------------//
 
-//--------------------------- Debug ---------------------------//
+//--------------------------- Debug End ---------------------------//
+
+
+//LeetCode: 3.无重复字符的最长子串（滑动窗口）
+- (int)lengthOfLongestSubstring:(NSString *)s{
+    int n = (int)s.length;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    int i = 0, j = 0, len = 0;
+    while (i < n && j < n) {
+        NSString *charS = [s substringWithRange:NSMakeRange(j, 1)];//指针j所在位置的字符
+        if (!dic[charS]) { //j所在字符没有在当前哈希表中，将该字符存进哈希表中，并将窗口j向右滑动一位，长度等于j减去i的差值
+            dic[charS] = @"YES";
+            j++;
+            len = MAX(len, j-i);
+        } else { //j所在字符已存在哈希表中，先从哈希表中删除当前i所在位置字符，然后将i向右滑动一位
+            NSString *charIndexIS = [s substringWithRange:NSMakeRange(i, 1)];//指针i所在位置的字符
+            dic[charIndexIS] = nil;
+            i ++;
+        }
+    }
+    return len;
+}
+
 /**
  LeetCode:14.最长公共前缀
  */
@@ -40,55 +63,6 @@
         }
         index ++;
     }
-}
-
-/**
- LeetCode:14.最长公共前缀
- */
-char* longestCommonPrefix(char** strs, int strsSize) {
-    
-    char *result;
-    int count = 0;
-    int index = 0;
-    
-    while (1) {
-        char temp = "";
-        for (int i = 0; i < strsSize; i ++) {
-            char *sub = strs[i];
-            if (temp == "\0") {
-                temp = sub;
-            }
-        }
-    }
-    
-    for (int i = 0; i < strsSize; i ++) {
-        char*sub = strs[i];
-        
-        
-        printf("%s\n", sub);
-    }
-    return "";
-}
-//--------------------------- Debug ---------------------------//
-
-//LeetCode: 3.无重复字符的最长子串（滑动窗口）
-- (int)lengthOfLongestSubstring:(NSString *)s{
-    int n = (int)s.length;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    int i = 0, j = 0, len = 0;
-    while (i < n && j < n) {
-        NSString *charS = [s substringWithRange:NSMakeRange(j, 1)];//指针j所在位置的字符
-        if (!dic[charS]) { //j所在字符没有在当前哈希表中，将该字符存进哈希表中，并将窗口j向右滑动一位，长度等于j减去i的差值
-            dic[charS] = @"YES";
-            j++;
-            len = MAX(len, j-i);
-        } else { //j所在字符已存在哈希表中，先从哈希表中删除当前i所在位置字符，然后将i向右滑动一位
-            NSString *charIndexIS = [s substringWithRange:NSMakeRange(i, 1)];//指针i所在位置的字符
-            dic[charIndexIS] = nil;
-            i ++;
-        }
-    }
-    return len;
 }
 
 /**
@@ -202,7 +176,7 @@ char firstAppearOnceChar(char *str){
  输入: [4,0,4]
  输出: 0
  
- 异或操作
+ 异或操作(两个相同的数按位异或是0，与0按位异或的数是它本身)
  
  0x100 = 4
  0x000 = 0
@@ -242,6 +216,32 @@ int singleNumber(int* nums, int numsSize) {
     return result;
 }
 
+#pragma mark - LeetCode: 169.求众数
+/**
+ 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+ 你可以假设数组是非空的，并且给定的数组总是存在众数。
+ 示例 1:
+ 输入: [3,2,3]
+ 输出: 3
+ 解题思路：分析得知众数一定是出现次数最多的那个数
+ */
+- (int)majorityElement:(NSArray *)arr{
+    NSMutableDictionary *numCountDic = [NSMutableDictionary dictionary];
+    int countMaxNumber = 0;//出现次数最多的数字
+    int maxCount = 0;//出现最多的次数
+    for (NSString *numberStr in arr) {
+        int numCount = [[numCountDic objectForKey:numberStr] intValue];//该数字出现的次数
+        numCount ++;
+        [numCountDic setValue:@(numCount) forKey:numberStr];
+        if (maxCount < numCount) {
+            maxCount = numCount;
+            countMaxNumber = [numberStr intValue];
+        }
+    }
+    return countMaxNumber;
+}
+
+
 /**
  LeetCode: 283.移动零
  给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
@@ -251,8 +251,8 @@ int singleNumber(int* nums, int numsSize) {
  比如： [0, 1, 0, 3, 12]   ->  [1, 3, 12, 0, 0]
  [4,2,4,0,0,3,0,5,1,0]
  注意有负数！！！
- 第一次提交报错的测试用例 [4,2,4,0,0,0,6,5,3]
- 第一次提交报错的测试用例 [-959151711,623836953,209446690,-1950418142,1339915067,-733626417,481171539,-2125997010,-1225423476,1462109565,147434687,-1800073781,-1431212205,-450443973,50097298,753533734,-747189404,-2070885638,0,-1484353894,-340296594,-2133744570,619639811,-1626162038,669689561,0,112220218]
+ 第1次提交报错的测试用例 [4,2,4,0,0,0,6,5,3]
+ 第2次提交报错的测试用例 [-959151711,623836953,209446690,-1950418142,1339915067,-733626417,481171539,-2125997010,-1225423476,1462109565,147434687,-1800073781,-1431212205,-450443973,50097298,753533734,-747189404,-2070885638,0,-1484353894,-340296594,-2133744570,619639811,-1626162038,669689561,0,112220218]
  */
 void moveZeroes(int* nums, int numsSize) {
     int current = 0;

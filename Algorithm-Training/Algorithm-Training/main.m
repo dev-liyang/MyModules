@@ -46,18 +46,16 @@ int main(int argc, const char * argv[]) {
     
     
     LeetCodeOC *leetCode = [[LeetCodeOC alloc] init];
-    //-------------------------- (Debug) start-------------------------//
-    //LeetCode: 14.最长公共前缀
     
-    struct ListNode *l1 = constuctList();
-    struct ListNode *l2 = constuctList2();
-    printfList(l1);
-    printfList(l2);
-    //LeetCode:21. 合并两个有序链表
-    struct ListNode *result = mergeTwoLists(l1, l2);
-    printfList(result);
+    
+    
+    //-------------------------- (Debug) start-------------------------//
+    
     
     //-------------------------- (Debug) end-------------------------//
+    
+    
+    
     
     //    struct ListNode *l1 = constuctList();
     //    struct ListNode *l2 = constuctList2();
@@ -69,6 +67,21 @@ int main(int argc, const char * argv[]) {
     
     //    LeetCode: 3.无重复字符的最长子串（滑动窗口）
     //    NSLog(@"长度:%d", [leetCode lengthOfLongestSubstring:@"abbcd"]);
+    
+    
+    //LeetCode: 14.最长公共前缀
+//    NSString *str = [leetCode longestCommonPrefix:@[@"flight", @"flower", @"flow"]];
+//    NSLog(@"最长公共前缀:%@", str);
+    
+    
+    //LeetCode:21. 合并两个有序链表
+//    struct ListNode *l1 = constuctList();
+//    struct ListNode *l2 = constuctList2();
+//    printfList(l1);
+//    printfList(l2);
+//    struct ListNode *result = mergeTwoLists(l1, l2);
+//    printfList(result);
+    
     
     //LeetCode: 88.合并两个有序数组
     //    int a[] = {1,2,5,6,8};
@@ -89,6 +102,12 @@ int main(int argc, const char * argv[]) {
     //    int size = sizeof(arr)/sizeof(4);
     //    int res = singleNumber(arr, size);
     //    NSLog(@"%d", res);
+    
+    
+    //LeetCode: 169.求众数
+//    int number = [leetCode majorityElement:@[@"1", @"1", @"2", @"2", @"1"]];
+//    NSLog(@"众数是：%d", number);
+    
     
     //LeetCode:206.反转链表
     //    reverseListTest();
