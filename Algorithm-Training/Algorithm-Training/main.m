@@ -82,6 +82,9 @@ int main(int argc, const char * argv[]) {
 //    struct ListNode *result = mergeTwoLists(l1, l2);
 //    printfList(result);
     
+    //LeetCode:70. 爬楼梯
+//    int n = 5;
+//    NSLog(@"%d个台阶有%d种爬法", n, climbStairs(n));
     
     //LeetCode: 88.合并两个有序数组
     //    int a[] = {1,2,5,6,8};

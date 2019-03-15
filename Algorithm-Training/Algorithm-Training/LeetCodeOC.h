@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 //LeetCode: 26.从排序数组中删除重复项
 int removeDuplicates(int* nums, int numsSize);
 
+//LeetCode:70. 爬楼梯
+int climbStairs(int n);
+
 //LeetCode: 88.合并两个有序数组
 void mergeList(int a[], int aLen, int b[], int bLen, int result[]);
 

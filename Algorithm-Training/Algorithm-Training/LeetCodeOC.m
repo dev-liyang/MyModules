@@ -108,8 +108,25 @@ int removeDuplicates(int* nums, int numsSize) {
     return count;
 }
 
+#pragma mark - LeetCode:70. 爬楼梯
 /**
- LeetCode: 88.合并两个有序数组
+ 解题思路：爬楼梯就是一个裴波那契数列，从第三项起，是前两项之和。F(n)=F(n-1)+F(n-2)。
+ 编程方法可用递归，但递归调用不适合太多次，此题可转化为for循环解决
+ */
+int climbStairs(int n) {
+    if (n<=2) return n;
+    int first = 1;
+    int second = 2;
+    for (int i = 2; i < n; i ++) {
+        int sum = first + second;
+        first = second;
+        second = sum;
+    }
+    return second;
+}
+
+#pragma mark -  LeetCode: 88.合并两个有序数组
+/**
  有序数组合并，合并后保持有序
  比如:  [1,2,5,6,8]  和 [3,6,7,8,9]
  合并后为:   [1,2,3,5,6,6,7,8,8,9]
