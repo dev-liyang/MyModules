@@ -82,9 +82,11 @@ int main(int argc, const char * argv[]) {
 //    struct ListNode *result = mergeTwoLists(l1, l2);
 //    printfList(result);
     
+    
     //LeetCode:70. 爬楼梯
 //    int n = 5;
 //    NSLog(@"%d个台阶有%d种爬法", n, climbStairs(n));
+    
     
     //LeetCode: 88.合并两个有序数组
     //    int a[] = {1,2,5,6,8};
@@ -93,7 +95,12 @@ int main(int argc, const char * argv[]) {
     //    int blength = sizeof(b) / sizeof(int);
     //    int result[100];
     //    mergeList(a, alength, b, blength, result);
+
     
+    //LeetCode:121. 买卖股票的最佳时机
+//    int arr[4] = {7, 3, 2, 12};
+//    int size = sizeof(arr)/ sizeof(int);
+//    printf("最大利润：%d", maxProfit(arr, size));
     
     //    LeetCode: 136.找到第一个只出现一次的字符
     //    char first =  firstAppearOnceChar("abccafdgh");

@@ -160,6 +160,24 @@ void mergeList(int a[], int aLen, int b[], int bLen, int result[]){
     }
 }
 
+#pragma mark - LeetCode: 121. 买卖股票的最佳时机
+int maxProfit(int* prices, int pricesSize) {
+    
+    int minimPrice = prices[0];
+    int profit = 0;
+    
+    for (int i = 1 ; i < pricesSize; i ++) {
+        if (prices[i] < minimPrice) {
+            minimPrice = prices[i];
+        } else{
+            if (prices[i] - minimPrice > profit) {
+                profit = prices[i] - minimPrice;
+            }
+        }
+    }
+    return profit;
+}
+
 #pragma mark - LeetCode: 136.找到第一个只出现一次的字符
 char firstAppearOnceChar(char *str){
     

@@ -27,6 +27,9 @@ int climbStairs(int n);
 //LeetCode: 88.合并两个有序数组
 void mergeList(int a[], int aLen, int b[], int bLen, int result[]);
 
+//LeetCode: 121. 买卖股票的最佳时机
+int maxProfit(int* prices, int pricesSize);
+
 //LeetCode: 136.找到第一个只出现一次的字符
 char firstAppearOnceChar(char *str);
 //LeetCode: 136.只出现一次的数字
