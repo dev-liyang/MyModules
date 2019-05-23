@@ -10,6 +10,7 @@
 
 #import "LeetCodeOC.h"
 #include "ReverseList.h"
+#import "OCLinkedList.h"
 
 /**
  判断一个数是否是质数
@@ -39,22 +40,38 @@ void reverseListTest(){
 
 int main(int argc, const char * argv[]) {
     
+    OCLinkedList *linkedList = [OCLinkedList new];
+    [linkedList addNode:1];
+    [linkedList addNode:2];
+    [linkedList addNode:3];
+    [linkedList addNode:4];
+    [linkedList addNode:3];
+    [linkedList addNode:10];
+    
+    [linkedList printfLinedList];
+    
+    [linkedList deleteElement:3];
+    
+    [linkedList printfLinedList];
+    
+    NSLog(@"%d", [linkedList getOfIndex:0]);
+    NSLog(@"%d", [linkedList getOfIndex:2]);
+    
     //-------------------------- test-------------------------//
     //    NSLog(@"是否是质数:%d", isZhiShu(3));
     //    NSLog(@"是否是质数:%d", isZhiShu(8));
     //    NSLog(@"是否是质数:%d", isZhiShu(11));
     
     
-    LeetCodeOC *leetCode = [[LeetCodeOC alloc] init];
+//    LeetCodeOC *leetCode = [[LeetCodeOC alloc] init];
     
     
     
     //-------------------------- (Debug) start-------------------------//
     
+//    @"flower"  @"lower"
     
     //-------------------------- (Debug) end-------------------------//
-    
-    
     
     
     //    struct ListNode *l1 = constuctList();

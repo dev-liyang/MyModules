@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6596DE62285142B00A944F7 /* OCLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = B6596DE52285142B00A944F7 /* OCLinkedList.m */; };
 		B6E91D0621FB1AC7007CA9F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E91D0521FB1AC7007CA9F5 /* main.m */; };
 		B6E91D1021FB1AE0007CA9F5 /* LeetCodeOC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E91D0D21FB1AE0007CA9F5 /* LeetCodeOC.m */; };
 		B6E91D1121FB1AE0007CA9F5 /* ReverseList.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E91D0E21FB1AE0007CA9F5 /* ReverseList.c */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B6596DE42285142B00A944F7 /* OCLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCLinkedList.h; sourceTree = "<group>"; };
+		B6596DE52285142B00A944F7 /* OCLinkedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCLinkedList.m; sourceTree = "<group>"; };
 		B6E91D0221FB1AC7007CA9F5 /* Algorithm-Training */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Algorithm-Training"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E91D0521FB1AC7007CA9F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6E91D0C21FB1AE0007CA9F5 /* LeetCodeOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeetCodeOC.h; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 				B6E91D0521FB1AC7007CA9F5 /* main.m */,
 				B6E91D0C21FB1AE0007CA9F5 /* LeetCodeOC.h */,
 				B6E91D0D21FB1AE0007CA9F5 /* LeetCodeOC.m */,
+				B6596DE42285142B00A944F7 /* OCLinkedList.h */,
+				B6596DE52285142B00A944F7 /* OCLinkedList.m */,
 				B6E91D0F21FB1AE0007CA9F5 /* ReverseList.h */,
 				B6E91D0E21FB1AE0007CA9F5 /* ReverseList.c */,
 			);
@@ -130,6 +135,7 @@
 			files = (
 				B6E91D1021FB1AE0007CA9F5 /* LeetCodeOC.m in Sources */,
 				B6E91D0621FB1AC7007CA9F5 /* main.m in Sources */,
+				B6596DE62285142B00A944F7 /* OCLinkedList.m in Sources */,
 				B6E91D1121FB1AE0007CA9F5 /* ReverseList.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
