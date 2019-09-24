@@ -114,6 +114,42 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     return result;
 }
 
+//LeetCode:19. 删除链表的倒数第N个节点
+//
+//给定一个链表: 1->2->3->4->5, 和 n = 2.
+//
+//当删除了倒数第二个节点后，链表变为  1->2->3->5
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
+    
+    if (head == NULL || n == 0) {
+        return NULL;
+    }
+    
+    struct ListNode *first = head;
+    struct ListNode *second = head;
+    
+    int p = 1;
+    
+    //找到删除目标的上一个节点（如果目标是头结点，那它的上个节点这里返回的是它自己，需要在while外后面的if判断中处理）
+    while (first->next != NULL) {
+        if (p > n) {
+            second = second->next;
+        }
+        
+        first = first->next;
+        p ++;
+    }
+    
+    if (p <= n) { //需要删除的是头节点
+        head = head->next;
+    } else { //中间及最后的一个节点
+        second->next = second->next->next;
+    }
+    
+    return head;
+}
+
+
 //LeetCode:21. 合并两个有序链表
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
     struct ListNode* result = NULL;

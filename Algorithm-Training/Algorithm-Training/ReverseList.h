@@ -28,6 +28,9 @@ void printfList(struct ListNode *head);
 //LeetCode:2.两数相加
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 
+//LeetCode:19. 删除链表的倒数第N个节点
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n);
+
 //LeetCode:21. 合并两个有序链表
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2);
 

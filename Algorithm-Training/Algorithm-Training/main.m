@@ -12,20 +12,6 @@
 #include "ReverseList.h"
 #import "OCLinkedList.h"
 
-/**
- 判断一个数是否是质数
- */
-Boolean isZhiShu(int a){
-    
-    for (int i = 2 ; i < a; i ++) {
-        if (a % i == 0) {
-            return false;
-        }
-    }
-    
-    return true;
-}
-
 //LeetCode:206.反转链表
 void reverseListTest(){
     
@@ -40,55 +26,35 @@ void reverseListTest(){
 
 int main(int argc, const char * argv[]) {
     
-    OCLinkedList *linkedList = [OCLinkedList new];
-    [linkedList addNode:1];
-    [linkedList addNode:2];
-    [linkedList addNode:3];
-    [linkedList addNode:4];
-    [linkedList addNode:3];
-    [linkedList addNode:10];
-    
-    [linkedList printfLinedList];
-    
-    [linkedList deleteElement:3];
-    
-    [linkedList printfLinedList];
-    
-    NSLog(@"%d", [linkedList getOfIndex:0]);
-    NSLog(@"%d", [linkedList getOfIndex:2]);
-    
-    //-------------------------- test-------------------------//
-    //    NSLog(@"是否是质数:%d", isZhiShu(3));
-    //    NSLog(@"是否是质数:%d", isZhiShu(8));
-    //    NSLog(@"是否是质数:%d", isZhiShu(11));
-    
-    
-//    LeetCodeOC *leetCode = [[LeetCodeOC alloc] init];
-    
-    
-    
     //-------------------------- (Debug) start-------------------------//
     
-//    @"flower"  @"lower"
+    
     
     //-------------------------- (Debug) end-------------------------//
     
     
-    //    struct ListNode *l1 = constuctList();
-    //    struct ListNode *l2 = constuctList2();
-    //    //LeetCode: 2.两数相加
-    //    struct ListNode *result = addTwoNumbers(l1, l2);
-    //    printfList(l1);
-    //    printfList(l2);
-    //    printfList(result);
     
-    //    LeetCode: 3.无重复字符的最长子串（滑动窗口）
-    //    NSLog(@"长度:%d", [leetCode lengthOfLongestSubstring:@"abbcd"]);
+    //LeetCode: 2.两数相加
+//    struct ListNode *l1 = constuctList();
+//    struct ListNode *l2 = constuctList2();
+//    struct ListNode *result = addTwoNumbers(l1, l2);
+//    printfList(l1);
+//    printfList(l2);
+//    printfList(result);
+    
+    //LeetCode: 3.无重复字符的最长子串（滑动窗口）
+//    NSLog(@"长度:%d", [leetCode lengthOfLongestSubstring:@"abbcd"]);
     
     
     //LeetCode: 14.最长公共前缀
 //    NSString *str = [leetCode longestCommonPrefix:@[@"flight", @"flower", @"flow"]];
 //    NSLog(@"最长公共前缀:%@", str);
+    
+    
+    //LeetCode:19. 删除链表的倒数第N个节点
+//    struct ListNode *l1 = constuctList();
+//    printfList(l1);
+//    printfList(removeNthFromEnd(l1, 2));
     
     
     //LeetCode:21. 合并两个有序链表
